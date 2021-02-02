@@ -67,6 +67,11 @@ public final class ToopKafkaClientTest
   @Test
   public void testBasic ()
   {
+    if (false)
+    {
+      // Set the correct server to see real messages
+      ToopKafkaSettings.defaultProperties ().put ("bootstrap.servers", "tracker.acc.exchange.toop.eu:7073");
+    }
     try
     {
       // Don't send too many - will take forever if no Kafka server is up and
