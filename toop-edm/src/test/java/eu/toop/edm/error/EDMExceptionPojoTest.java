@@ -50,7 +50,7 @@ import eu.toop.regrep.RegRep4Writer;
  *
  * @author Philip Helger
  */
-public final class EDMExceptionBuilderTest
+public final class EDMExceptionPojoTest
 {
   private static void _testWriteAndRead (@Nonnull final EDMExceptionPojo aEx)
   {
