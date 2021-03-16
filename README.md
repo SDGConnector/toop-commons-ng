@@ -1,5 +1,7 @@
 # TOOP Commons NG
 
+Start with http://wiki.ds.unipi.gr/display/CCTF/ to understand the context of this project.
+
 The code contained in this project is used by:
 * https://github.com/TOOP4EU/data-services-directory - Data Services Directory (DSD)
 * https://github.com/TOOP4EU/toop-connector-ng - TOOP Connector NG
