@@ -37,9 +37,8 @@ import javax.annotation.Nonnull;
 
 import com.helger.commons.annotation.MustImplementEqualsAndHashcode;
 import com.helger.commons.annotation.Nonempty;
-
-import eu.toop.regrep.rim.ObjectRefType;
-import eu.toop.regrep.rim.RegistryObjectType;
+import com.helger.regrep.rim.ObjectRefType;
+import com.helger.regrep.rim.RegistryObjectType;
 
 /**
  * Abstract EDM Response payload provider.

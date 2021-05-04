@@ -40,9 +40,8 @@ import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
-
-import eu.toop.regrep.slot.ISlotProvider;
-import eu.toop.regrep.slot.predefined.SlotId;
+import com.helger.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.predefined.SlotId;
 
 /**
  * Request payload: Document ID

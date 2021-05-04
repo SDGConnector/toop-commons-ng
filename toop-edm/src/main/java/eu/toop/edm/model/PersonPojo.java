@@ -40,14 +40,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.concurrent.Immutable;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.helger.commons.ValueEnforcer;
+import com.helger.commons.datetime.XMLOffsetDate;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
-import com.helger.datetime.util.PDTXMLConverter;
 
 import eu.toop.edm.jaxb.w3.cv.ac.CoreLocationType;
 import eu.toop.edm.jaxb.w3.cv.ac.CorePersonType;
@@ -397,9 +396,9 @@ public class PersonPojo
     }
 
     @Nonnull
-    public Builder birthDate (@Nullable final XMLGregorianCalendar a)
+    public Builder birthDate (@Nullable final XMLOffsetDate a)
     {
-      return birthDate (PDTXMLConverter.getLocalDate (a));
+      return birthDate (a == null ? null : a.toLocalDate ());
     }
 
     @Nonnull

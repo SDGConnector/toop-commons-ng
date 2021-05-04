@@ -36,8 +36,7 @@ package eu.toop.edm.request;
 import javax.annotation.Nonnull;
 
 import com.helger.commons.annotation.MustImplementEqualsAndHashcode;
-
-import eu.toop.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.ISlotProvider;
 
 /**
  * Abstract EDM Request payload provider.

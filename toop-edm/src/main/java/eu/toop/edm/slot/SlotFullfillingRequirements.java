@@ -41,14 +41,14 @@ import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.collection.impl.CommonsArrayList;
 import com.helger.commons.collection.impl.ICommonsList;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.slot.ERegRepCollectionType;
+import com.helger.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.SlotBuilder;
+import com.helger.regrep.slot.SlotHelper;
 
 import eu.toop.edm.jaxb.cccev.CCCEVRequirementType;
 import eu.toop.edm.xml.cccev.RequirementMarshaller;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.slot.ERegRepCollectionType;
-import eu.toop.regrep.slot.ISlotProvider;
-import eu.toop.regrep.slot.SlotHelper;
-import eu.toop.regrep.slot.SlotBuilder;
 
 /**
  * "FullfillingRequirement" slot

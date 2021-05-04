@@ -44,10 +44,10 @@ import com.helger.commons.collection.impl.ICommonsList;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.slot.ISlotProvider;
 
 import eu.toop.edm.model.DistributionPojo;
 import eu.toop.edm.slot.SlotDistributionRequestList;
-import eu.toop.regrep.slot.ISlotProvider;
 
 /**
  * Request payload: Distribution

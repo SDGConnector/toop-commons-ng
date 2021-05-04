@@ -33,6 +33,8 @@
  */
 package eu.toop.edm.xml.cccev;
 
+import java.util.function.Function;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
@@ -40,7 +42,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 
 import com.helger.commons.collection.impl.CommonsArrayList;
-import com.helger.commons.functional.IFunction;
 import com.helger.jaxb.GenericJAXBMarshaller;
 import com.helger.jaxb.JAXBContextCache;
 
@@ -54,7 +55,7 @@ import com.helger.jaxb.JAXBContextCache;
 public abstract class AbstractCCCEVMarshaller <T> extends GenericJAXBMarshaller <T>
 {
   public AbstractCCCEVMarshaller (@Nonnull final Class <T> aType,
-                                  @Nonnull final IFunction <? super T, ? extends JAXBElement <T>> aJAXBElementWrapper)
+                                  @Nonnull final Function <? super T, ? extends JAXBElement <T>> aJAXBElementWrapper)
   {
     super (aType, CCCEV.XSDS, aJAXBElementWrapper);
     setNamespaceContext (CCCEVNamespaceContext.getInstance ());

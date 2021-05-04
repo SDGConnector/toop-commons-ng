@@ -80,22 +80,16 @@
   </developers>
   
   <properties>
-    <ph-xsds.version>2.4.1</ph-xsds.version>
+    <ph-xsds.version>2.6.0</ph-xsds.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <!-- Import all BOMs -->
       <dependency>
-        <groupId>com.helger</groupId>
-        <artifactId>ph-jaxb-pom</artifactId>
-        <version>1.1.0</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>com.helger</groupId>
+        <groupId>com.helger.commons</groupId>
         <artifactId>ph-commons-parent-pom</artifactId>
-        <version>9.5.4</version>
+        <version>10.1.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -109,49 +103,49 @@
       <dependency>
         <groupId>com.helger.ubl</groupId>
         <artifactId>ph-ubl-parent-pom</artifactId>
-        <version>6.4.2</version>
+        <version>6.6.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-css-parent-pom</artifactId>
-        <version>6.2.3</version>
+        <version>6.3.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger.web</groupId>
         <artifactId>ph-web-parent-pom</artifactId>
-        <version>9.5.2</version>
+        <version>9.6.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger.schematron</groupId>
         <artifactId>ph-schematron-parent-pom</artifactId>
-        <version>6.0.2</version>
+        <version>6.2.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger.peppol</groupId>
         <artifactId>peppol-commons-parent-pom</artifactId>
-        <version>8.3.1</version>
+        <version>8.6.0</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>com.helger.photon</groupId>
         <artifactId>ph-oton-parent-pom</artifactId>
-        <version>8.2.9</version>
+        <version>8.3.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-poi</artifactId>
-        <version>5.0.7</version>
+        <version>5.2.0</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
@@ -161,7 +155,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-genericode</artifactId>
-        <version>6.1.1</version>
+        <version>6.3.0</version>
       </dependency>
       <dependency>
         <groupId>com.sun.activation</groupId>
@@ -176,15 +170,15 @@
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.12.1</version>
+        <version>2.12.2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-regrep</artifactId>
+        <version>1.2.0</version>
       </dependency>
 
       <!-- The sub-projects of this project have a constant version -->
-      <dependency>
-        <groupId>eu.toop</groupId>
-        <artifactId>toop-regrep</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <dependency>
         <groupId>eu.toop</groupId>
         <artifactId>toop-kafka-client</artifactId>
@@ -215,7 +209,6 @@
   <!-- Sub-projects - must match child directory names; order is important! -->
   <modules>
     <module>toop-codelist-tools</module>
-    <module>toop-regrep</module>
     <module>toop-kafka-client</module>
     <module>toop-edm</module>
     <module>toop-commons</module>

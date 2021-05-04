@@ -46,15 +46,15 @@ import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.rim.AnyValueType;
+import com.helger.regrep.rim.ObjectRefType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.ValueType;
 
 import eu.toop.edm.jaxb.dcatap.DCatAPDatasetType;
 import eu.toop.edm.model.DatasetPojo;
 import eu.toop.edm.slot.SlotDocumentMetadata;
 import eu.toop.edm.xml.dcatap.DatasetMarshaller;
-import eu.toop.regrep.rim.AnyValueType;
-import eu.toop.regrep.rim.ObjectRefType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.ValueType;
 
 /**
  * Represents a single response object reference
@@ -68,7 +68,8 @@ public class ResponseDocumentReferencePojo implements IEDMResponsePayloadDocumen
   private final String m_sRegistryObjectID;
   private final DatasetPojo m_aDataset;
 
-  public ResponseDocumentReferencePojo (@Nonnull @Nonempty final String sRegistryObjectID, @Nonnull final DatasetPojo aDataset)
+  public ResponseDocumentReferencePojo (@Nonnull @Nonempty final String sRegistryObjectID,
+                                        @Nonnull final DatasetPojo aDataset)
   {
     ValueEnforcer.notEmpty (sRegistryObjectID, "RegistryObjectID");
     ValueEnforcer.notNull (aDataset, "Dataset");
@@ -111,7 +112,8 @@ public class ResponseDocumentReferencePojo implements IEDMResponsePayloadDocumen
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final ResponseDocumentReferencePojo rhs = (ResponseDocumentReferencePojo) o;
-    return EqualsHelper.equals (m_sRegistryObjectID, rhs.m_sRegistryObjectID) && EqualsHelper.equals (m_aDataset, rhs.m_aDataset);
+    return EqualsHelper.equals (m_sRegistryObjectID, rhs.m_sRegistryObjectID) &&
+           EqualsHelper.equals (m_aDataset, rhs.m_aDataset);
   }
 
   @Override
@@ -123,7 +125,9 @@ public class ResponseDocumentReferencePojo implements IEDMResponsePayloadDocumen
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("RegistryObjectID", m_sRegistryObjectID).append ("Dataset", m_aDataset).getToString ();
+    return new ToStringGenerator (this).append ("RegistryObjectID", m_sRegistryObjectID)
+                                       .append ("Dataset", m_aDataset)
+                                       .getToString ();
   }
 
   @Nonnull

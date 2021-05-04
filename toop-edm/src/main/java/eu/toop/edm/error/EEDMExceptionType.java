@@ -38,18 +38,18 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import eu.toop.regrep.query.QueryExceptionType;
-import eu.toop.regrep.rs.AuthenticationExceptionType;
-import eu.toop.regrep.rs.AuthorizationExceptionType;
-import eu.toop.regrep.rs.InvalidRequestExceptionType;
-import eu.toop.regrep.rs.ObjectExistsExceptionType;
-import eu.toop.regrep.rs.ObjectNotFoundExceptionType;
-import eu.toop.regrep.rs.QuotaExceededExceptionType;
-import eu.toop.regrep.rs.ReferencesExistExceptionType;
-import eu.toop.regrep.rs.RegistryExceptionType;
-import eu.toop.regrep.rs.TimeoutExceptionType;
-import eu.toop.regrep.rs.UnresolvedReferenceExceptionType;
-import eu.toop.regrep.rs.UnsupportedCapabilityExceptionType;
+import com.helger.regrep.query.QueryExceptionType;
+import com.helger.regrep.rs.AuthenticationExceptionType;
+import com.helger.regrep.rs.AuthorizationExceptionType;
+import com.helger.regrep.rs.InvalidRequestExceptionType;
+import com.helger.regrep.rs.ObjectExistsExceptionType;
+import com.helger.regrep.rs.ObjectNotFoundExceptionType;
+import com.helger.regrep.rs.QuotaExceededExceptionType;
+import com.helger.regrep.rs.ReferencesExistExceptionType;
+import com.helger.regrep.rs.RegistryExceptionType;
+import com.helger.regrep.rs.TimeoutExceptionType;
+import com.helger.regrep.rs.UnresolvedReferenceExceptionType;
+import com.helger.regrep.rs.UnsupportedCapabilityExceptionType;
 
 /**
  * Contains the different possible exception types.

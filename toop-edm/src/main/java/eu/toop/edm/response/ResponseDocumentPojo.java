@@ -47,17 +47,17 @@ import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.rim.AnyValueType;
+import com.helger.regrep.rim.ExtrinsicObjectType;
+import com.helger.regrep.rim.SimpleLinkType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.ValueType;
 
 import eu.toop.edm.jaxb.dcatap.DCatAPDatasetType;
 import eu.toop.edm.model.DatasetPojo;
 import eu.toop.edm.model.RepositoryItemRefPojo;
 import eu.toop.edm.slot.SlotDocumentMetadata;
 import eu.toop.edm.xml.dcatap.DatasetMarshaller;
-import eu.toop.regrep.rim.AnyValueType;
-import eu.toop.regrep.rim.ExtrinsicObjectType;
-import eu.toop.regrep.rim.SimpleLinkType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.ValueType;
 
 /**
  * Represents a single response object
@@ -136,7 +136,10 @@ public class ResponseDocumentPojo implements IEDMResponsePayloadDocument
   @Override
   public int hashCode ()
   {
-    return new HashCodeGenerator (this).append (m_sRegistryObjectID).append (m_aDataset).append (m_aRepositoryItemRef).getHashCode ();
+    return new HashCodeGenerator (this).append (m_sRegistryObjectID)
+                                       .append (m_aDataset)
+                                       .append (m_aRepositoryItemRef)
+                                       .getHashCode ();
   }
 
   @Override

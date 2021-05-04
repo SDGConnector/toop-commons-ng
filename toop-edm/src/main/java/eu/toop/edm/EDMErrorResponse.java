@@ -55,6 +55,17 @@ import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.ERegRepResponseStatus;
+import com.helger.regrep.RegRep4Reader;
+import com.helger.regrep.RegRep4Writer;
+import com.helger.regrep.RegRepHelper;
+import com.helger.regrep.query.QueryResponse;
+import com.helger.regrep.rim.AnyValueType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.StringValueType;
+import com.helger.regrep.rim.ValueType;
+import com.helger.regrep.rs.RegistryExceptionType;
+import com.helger.regrep.slot.ISlotProvider;
 
 import eu.toop.edm.error.EDMExceptionPojo;
 import eu.toop.edm.jaxb.cv.agent.AgentType;
@@ -67,17 +78,6 @@ import eu.toop.edm.xml.JAXBVersatileReader;
 import eu.toop.edm.xml.JAXBVersatileWriter;
 import eu.toop.edm.xml.cagv.AgentMarshaller;
 import eu.toop.edm.xml.cccev.CCCEV;
-import eu.toop.regrep.ERegRepResponseStatus;
-import eu.toop.regrep.RegRep4Reader;
-import eu.toop.regrep.RegRep4Writer;
-import eu.toop.regrep.RegRepHelper;
-import eu.toop.regrep.query.QueryResponse;
-import eu.toop.regrep.rim.AnyValueType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.StringValueType;
-import eu.toop.regrep.rim.ValueType;
-import eu.toop.regrep.rs.RegistryExceptionType;
-import eu.toop.regrep.slot.ISlotProvider;
 
 /**
  * A simple builder to create valid TOOP Error responses for both "concept
@@ -103,7 +103,8 @@ public class EDMErrorResponse implements IEDMTopLevelObject
                               @Nonnull @Nonempty final ICommonsList <EDMExceptionPojo> aExceptions)
   {
     ValueEnforcer.notNull (eResponseStatus, "ResponseStatus");
-    ValueEnforcer.isTrue (eResponseStatus == ERegRepResponseStatus.SUCCESS || eResponseStatus == ERegRepResponseStatus.FAILURE,
+    ValueEnforcer.isTrue (eResponseStatus == ERegRepResponseStatus.SUCCESS ||
+                          eResponseStatus == ERegRepResponseStatus.FAILURE,
                           "Only SUCCESS and FAILURE are supported");
     ValueEnforcer.notEmpty (sRequestID, "RequestID");
     ValueEnforcer.notEmpty (sSpecificationIdentifier, "SpecificationIdentifier");
@@ -202,7 +203,8 @@ public class EDMErrorResponse implements IEDMTopLevelObject
   @Nonnull
   public IVersatileWriter <QueryResponse> getWriter ()
   {
-    return new JAXBVersatileWriter <> (getAsErrorResponse (), RegRep4Writer.queryResponse (CCCEV.XSDS).setFormattedOutput (true));
+    return new JAXBVersatileWriter <> (getAsErrorResponse (),
+                                       RegRep4Writer.queryResponse (CCCEV.XSDS).setFormattedOutput (true));
   }
 
   @Nonnull
@@ -401,7 +403,8 @@ public class EDMErrorResponse implements IEDMTopLevelObject
     }
 
     @Nonnull
-    public <T> Builder exceptions (@Nullable final Iterable <? extends T> a, @Nonnull final Function <? super T, EDMExceptionPojo> aMapper)
+    public <T> Builder exceptions (@Nullable final Iterable <? extends T> a,
+                                   @Nonnull final Function <? super T, EDMExceptionPojo> aMapper)
     {
       m_aExceptions.setAllMapped (a, aMapper);
       return this;
@@ -426,7 +429,11 @@ public class EDMErrorResponse implements IEDMTopLevelObject
     {
       checkConsistency ();
 
-      return new EDMErrorResponse (m_eResponseStatus, m_sRequestID, m_sSpecificationIdentifier, m_aErrorProvider, m_aExceptions);
+      return new EDMErrorResponse (m_eResponseStatus,
+                                   m_sRequestID,
+                                   m_sSpecificationIdentifier,
+                                   m_aErrorProvider,
+                                   m_aExceptions);
     }
   }
 

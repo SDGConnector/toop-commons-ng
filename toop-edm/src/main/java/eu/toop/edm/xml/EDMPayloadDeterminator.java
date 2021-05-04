@@ -46,6 +46,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.helger.commons.io.stream.StreamHelper;
+import com.helger.regrep.CRegRep4;
 import com.helger.xml.XMLHelper;
 import com.helger.xml.serialize.read.DOMReader;
 
@@ -53,7 +54,6 @@ import eu.toop.edm.EDMErrorResponse;
 import eu.toop.edm.EDMRequest;
 import eu.toop.edm.EDMResponse;
 import eu.toop.edm.IEDMTopLevelObject;
-import eu.toop.regrep.CRegRep4;
 
 /**
  * Helper class to determine the type of the object from payload (for reading).

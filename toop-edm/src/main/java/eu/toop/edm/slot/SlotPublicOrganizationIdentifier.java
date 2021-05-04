@@ -37,11 +37,10 @@ import javax.annotation.Nonnull;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
-
-import eu.toop.regrep.helper.VocabularyTerm;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.slot.ISlotProvider;
-import eu.toop.regrep.slot.SlotBuilder;
+import com.helger.regrep.helper.VocabularyTerm;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.SlotBuilder;
 
 /**
  * Error "PublicOrganizationIdentifier" slot

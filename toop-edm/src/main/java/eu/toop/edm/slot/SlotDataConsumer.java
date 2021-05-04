@@ -37,12 +37,12 @@ import javax.annotation.Nonnull;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.SlotBuilder;
 
 import eu.toop.edm.model.AgentPojo;
 import eu.toop.edm.xml.cagv.AgentMarshaller;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.slot.ISlotProvider;
-import eu.toop.regrep.slot.SlotBuilder;
 
 /**
  * "DataConsumer" slot

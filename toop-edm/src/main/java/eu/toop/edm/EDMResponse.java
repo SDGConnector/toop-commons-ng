@@ -34,6 +34,7 @@
 package eu.toop.edm;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
@@ -57,11 +58,29 @@ import com.helger.commons.collection.impl.ICommonsList;
 import com.helger.commons.collection.impl.ICommonsOrderedMap;
 import com.helger.commons.collection.impl.ICommonsOrderedSet;
 import com.helger.commons.datetime.PDTFactory;
+import com.helger.commons.datetime.XMLOffsetDateTime;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
 import com.helger.commons.traits.IGenericImplTrait;
+import com.helger.regrep.ERegRepResponseStatus;
+import com.helger.regrep.RegRep4Reader;
+import com.helger.regrep.RegRep4Writer;
+import com.helger.regrep.RegRepHelper;
+import com.helger.regrep.query.QueryResponse;
+import com.helger.regrep.rim.AnyValueType;
+import com.helger.regrep.rim.CollectionValueType;
+import com.helger.regrep.rim.DateTimeValueType;
+import com.helger.regrep.rim.ExtrinsicObjectType;
+import com.helger.regrep.rim.ObjectRefListType;
+import com.helger.regrep.rim.ObjectRefType;
+import com.helger.regrep.rim.RegistryObjectListType;
+import com.helger.regrep.rim.RegistryObjectType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.StringValueType;
+import com.helger.regrep.rim.ValueType;
+import com.helger.regrep.slot.ISlotProvider;
 
 import eu.toop.edm.jaxb.cccev.CCCEVConceptType;
 import eu.toop.edm.jaxb.cv.agent.AgentType;
@@ -83,23 +102,6 @@ import eu.toop.edm.xml.JAXBVersatileWriter;
 import eu.toop.edm.xml.cagv.AgentMarshaller;
 import eu.toop.edm.xml.cccev.CCCEV;
 import eu.toop.edm.xml.cccev.ConceptMarshaller;
-import eu.toop.regrep.ERegRepResponseStatus;
-import eu.toop.regrep.RegRep4Reader;
-import eu.toop.regrep.RegRep4Writer;
-import eu.toop.regrep.RegRepHelper;
-import eu.toop.regrep.query.QueryResponse;
-import eu.toop.regrep.rim.AnyValueType;
-import eu.toop.regrep.rim.CollectionValueType;
-import eu.toop.regrep.rim.DateTimeValueType;
-import eu.toop.regrep.rim.ExtrinsicObjectType;
-import eu.toop.regrep.rim.ObjectRefListType;
-import eu.toop.regrep.rim.ObjectRefType;
-import eu.toop.regrep.rim.RegistryObjectListType;
-import eu.toop.regrep.rim.RegistryObjectType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.StringValueType;
-import eu.toop.regrep.rim.ValueType;
-import eu.toop.regrep.slot.ISlotProvider;
 
 /**
  * This class contains the data model for a single TOOP EDM Request. It requires
@@ -146,7 +148,8 @@ public class EDMResponse implements IEDMTopLevelObject
   {
     ValueEnforcer.notNull (eResponseOption, "ResponseOption");
     ValueEnforcer.notNull (eResponseStatus, "ResponseStatus");
-    ValueEnforcer.isTrue (eResponseStatus == ERegRepResponseStatus.SUCCESS || eResponseStatus == ERegRepResponseStatus.FAILURE,
+    ValueEnforcer.isTrue (eResponseStatus == ERegRepResponseStatus.SUCCESS ||
+                          eResponseStatus == ERegRepResponseStatus.FAILURE,
                           "Only SUCCESS and FAILURE are supported");
     ValueEnforcer.notEmpty (sRequestID, "RequestID");
     ValueEnforcer.notEmpty (sSpecificationIdentifier, "SpecificationIdentifier");
@@ -292,7 +295,8 @@ public class EDMResponse implements IEDMTopLevelObject
   @Nonnull
   public IVersatileWriter <QueryResponse> getWriter ()
   {
-    return new JAXBVersatileWriter <> (getAsQueryResponse (), RegRep4Writer.queryResponse (CCCEV.XSDS).setFormattedOutput (true));
+    return new JAXBVersatileWriter <> (getAsQueryResponse (),
+                                       RegRep4Writer.queryResponse (CCCEV.XSDS).setFormattedOutput (true));
   }
 
   @Nonnull
@@ -349,7 +353,8 @@ public class EDMResponse implements IEDMTopLevelObject
   {
     // RegistryObjectID doesn't matter for concepts but must be settable in
     // import for comparison
-    return new BuilderConcept ().specificationIdentifier (CToopEDM.SPECIFICATION_IDENTIFIER_TOOP_EDM_V21).randomRegistryObjectID ();
+    return new BuilderConcept ().specificationIdentifier (CToopEDM.SPECIFICATION_IDENTIFIER_TOOP_EDM_V21)
+                                .randomRegistryObjectID ();
   }
 
   @Nonnull
@@ -417,6 +422,18 @@ public class EDMResponse implements IEDMTopLevelObject
     public final T issueDateTimeNow ()
     {
       return issueDateTime (PDTFactory.getCurrentLocalDateTime ());
+    }
+
+    @Nonnull
+    public final T issueDateTime (@Nullable final OffsetDateTime a)
+    {
+      return issueDateTime (a == null ? null : a.toLocalDateTime ());
+    }
+
+    @Nonnull
+    public final T issueDateTime (@Nullable final XMLOffsetDateTime a)
+    {
+      return issueDateTime (a == null ? null : a.toLocalDateTime ());
     }
 
     @Nonnull
@@ -590,7 +607,8 @@ public class EDMResponse implements IEDMTopLevelObject
     }
 
     @Nonnull
-    public <T> BuilderConcept concepts (@Nullable final Iterable <? extends T> a, @Nonnull final Function <? super T, ConceptPojo> aMapper)
+    public <T> BuilderConcept concepts (@Nullable final Iterable <? extends T> a,
+                                        @Nonnull final Function <? super T, ConceptPojo> aMapper)
     {
       m_aConcepts.setAllMapped (a, aMapper);
       return thisAsT ();
@@ -897,7 +915,7 @@ public class EDMResponse implements IEDMTopLevelObject
       case SlotIssueDateTime.NAME:
         if (aSlotValue instanceof DateTimeValueType)
         {
-          final LocalDateTime aCal = ((DateTimeValueType) aSlotValue).getValue ();
+          final XMLOffsetDateTime aCal = ((DateTimeValueType) aSlotValue).getValue ();
           aBuilder.issueDateTime (aCal);
         }
         break;
@@ -945,7 +963,9 @@ public class EDMResponse implements IEDMTopLevelObject
     // Get common stuff
     final ERegRepResponseStatus eResponseStatus = ERegRepResponseStatus.getFromIDOrNull (aQueryResponse.getStatus ());
     if (eResponseStatus == null)
-      throw new IllegalStateException ("Unsupported query response status '" + aQueryResponse.getStatus () + "' present.");
+      throw new IllegalStateException ("Unsupported query response status '" +
+                                       aQueryResponse.getStatus () +
+                                       "' present.");
 
     final String sRequestID = aQueryResponse.getRequestId ();
 
@@ -954,7 +974,8 @@ public class EDMResponse implements IEDMTopLevelObject
     if (aObjectRefList != null && aObjectRefList.hasObjectRefEntries ())
     {
       // Document Reference
-      final BuilderDocumentReference aRealBuilder = builderDocumentReference ().responseStatus (eResponseStatus).requestID (sRequestID);
+      final BuilderDocumentReference aRealBuilder = builderDocumentReference ().responseStatus (eResponseStatus)
+                                                                               .requestID (sRequestID);
       for (final SlotType aSlot : aQueryResponse.getSlot ())
         _applySlots (aSlot, aRealBuilder);
 
@@ -969,7 +990,9 @@ public class EDMResponse implements IEDMTopLevelObject
     {
       if (aRegistryObjectList.getRegistryObject ().size () == 1 &&
           aRegistryObjectList.getRegistryObjectAtIndex (0).getSlotCount () == 1 &&
-          SlotConceptValues.NAME.equals (aRegistryObjectList.getRegistryObjectAtIndex (0).getSlotAtIndex (0).getName ()))
+          SlotConceptValues.NAME.equals (aRegistryObjectList.getRegistryObjectAtIndex (0)
+                                                            .getSlotAtIndex (0)
+                                                            .getName ()))
       {
         // It's a Concept Response
         final RegistryObjectType aRO = aRegistryObjectList.getRegistryObject ().get (0);

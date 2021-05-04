@@ -47,10 +47,10 @@ import com.helger.commons.collection.impl.ICommonsList;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.rim.ExtrinsicObjectType;
 
 import eu.toop.edm.model.ConceptPojo;
 import eu.toop.edm.slot.SlotConceptValues;
-import eu.toop.regrep.rim.ExtrinsicObjectType;
 
 /**
  * Represents a single "Concept response" payload.

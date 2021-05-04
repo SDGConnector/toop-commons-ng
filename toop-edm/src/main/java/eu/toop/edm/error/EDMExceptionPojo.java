@@ -34,6 +34,7 @@
 package eu.toop.edm.error;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Nonnull;
@@ -41,18 +42,19 @@ import javax.annotation.Nullable;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.datetime.PDTFactory;
+import com.helger.commons.datetime.XMLOffsetDateTime;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.regrep.rim.DateTimeValueType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.StringValueType;
+import com.helger.regrep.rim.ValueType;
+import com.helger.regrep.rs.RegistryExceptionType;
 
 import eu.toop.edm.slot.SlotErrorOrigin;
 import eu.toop.edm.slot.SlotTimestamp;
-import eu.toop.regrep.rim.DateTimeValueType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.StringValueType;
-import eu.toop.regrep.rim.ValueType;
-import eu.toop.regrep.rs.RegistryExceptionType;
 
 /**
  * Build TOOP EDM exceptions to be used in TOOP error responses.
@@ -207,7 +209,7 @@ public class EDMExceptionPojo
       case SlotTimestamp.NAME:
         if (aSlotValue instanceof DateTimeValueType)
         {
-          final LocalDateTime aValue = ((DateTimeValueType) aSlotValue).getValue ();
+          final XMLOffsetDateTime aValue = ((DateTimeValueType) aSlotValue).getValue ();
           aBuilder.timestamp (aValue);
         }
         break;
@@ -316,6 +318,18 @@ public class EDMExceptionPojo
     public Builder timestampNow ()
     {
       return timestamp (PDTFactory.getCurrentLocalDateTime ());
+    }
+
+    @Nonnull
+    public final Builder timestamp (@Nullable final OffsetDateTime a)
+    {
+      return timestamp (a == null ? null : a.toLocalDateTime ());
+    }
+
+    @Nonnull
+    public final Builder timestamp (@Nullable final XMLOffsetDateTime a)
+    {
+      return timestamp (a == null ? null : a.toLocalDateTime ());
     }
 
     @Nonnull

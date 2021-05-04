@@ -41,9 +41,8 @@ import javax.annotation.Nonnull;
 import org.junit.Test;
 
 import com.helger.commons.mock.CommonsTestHelper;
-
-import eu.toop.regrep.RegRep4Reader;
-import eu.toop.regrep.RegRep4Writer;
+import com.helger.regrep.RegRep4Reader;
+import com.helger.regrep.RegRep4Writer;
 
 /**
  * Test class for class {@link EDMExceptionPojo}.
@@ -61,7 +60,8 @@ public final class EDMExceptionPojoTest
     assertNotNull (aBytes);
 
     // Re-read
-    final EDMExceptionPojo aResp2 = EDMExceptionPojo.builder (RegRep4Reader.registryException ().read (aBytes)).build ();
+    final EDMExceptionPojo aResp2 = EDMExceptionPojo.builder (RegRep4Reader.registryException ().read (aBytes))
+                                                    .build ();
     assertNotNull (aResp2);
 
     // Compare with original

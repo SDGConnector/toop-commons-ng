@@ -51,6 +51,7 @@ import com.helger.commons.collection.impl.ICommonsList;
 import com.helger.commons.datetime.PDTFactory;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.commons.mock.CommonsTestHelper;
+import com.helger.regrep.ERegRepResponseStatus;
 import com.helger.schematron.svrl.AbstractSVRLMessage;
 
 import eu.toop.edm.model.ConceptPojo;
@@ -60,7 +61,6 @@ import eu.toop.edm.model.EToopLanguageCode;
 import eu.toop.edm.pilot.gbm.EToopConcept;
 import eu.toop.edm.schematron.SchematronBusinessRules2Validator;
 import eu.toop.edm.schematron.SchematronEDM2Validator;
-import eu.toop.regrep.ERegRepResponseStatus;
 
 /**
  * Test class for class {@link EDMResponse}.
@@ -166,8 +166,10 @@ public final class EDMResponseTest
   @Nonnull
   private static EDMResponse.BuilderDocumentReference _respDocumentRef ()
   {
-    return _resp (EDMResponse.builderDocumentReference ()).addResponseObject (x -> x.randomRegistryObjectID ().dataset (_dataset ()))
-                                                          .addResponseObject (x -> x.randomRegistryObjectID ().dataset (_dataset ()));
+    return _resp (EDMResponse.builderDocumentReference ()).addResponseObject (x -> x.randomRegistryObjectID ()
+                                                                                    .dataset (_dataset ()))
+                                                          .addResponseObject (x -> x.randomRegistryObjectID ()
+                                                                                    .dataset (_dataset ()));
   }
 
   @Test

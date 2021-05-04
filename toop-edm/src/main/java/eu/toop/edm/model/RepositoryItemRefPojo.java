@@ -41,8 +41,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
-
-import eu.toop.regrep.rim.SimpleLinkType;
+import com.helger.regrep.rim.SimpleLinkType;
 
 /**
  * Represents a single "Repository item reference" object.

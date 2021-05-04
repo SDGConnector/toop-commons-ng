@@ -34,6 +34,7 @@
 package eu.toop.edm;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
@@ -61,11 +62,30 @@ import com.helger.commons.collection.impl.ICommonsOrderedMap;
 import com.helger.commons.collection.impl.ICommonsOrderedSet;
 import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.commons.datetime.PDTFactory;
+import com.helger.commons.datetime.XMLOffsetDateTime;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
 import com.helger.commons.traits.IGenericImplTrait;
+import com.helger.regrep.RegRep4Reader;
+import com.helger.regrep.RegRep4Writer;
+import com.helger.regrep.RegRepHelper;
+import com.helger.regrep.query.QueryRequest;
+import com.helger.regrep.query.ResponseOptionType;
+import com.helger.regrep.rim.AnyValueType;
+import com.helger.regrep.rim.CollectionValueType;
+import com.helger.regrep.rim.DateTimeValueType;
+import com.helger.regrep.rim.InternationalStringType;
+import com.helger.regrep.rim.InternationalStringValueType;
+import com.helger.regrep.rim.LocalizedStringType;
+import com.helger.regrep.rim.QueryType;
+import com.helger.regrep.rim.SlotType;
+import com.helger.regrep.rim.StringValueType;
+import com.helger.regrep.rim.ValueType;
+import com.helger.regrep.slot.ISlotProvider;
+import com.helger.regrep.slot.SlotHelper;
+import com.helger.regrep.slot.predefined.SlotId;
 
 import eu.toop.edm.jaxb.cccev.CCCEVConceptType;
 import eu.toop.edm.jaxb.cccev.CCCEVRequirementType;
@@ -108,24 +128,6 @@ import eu.toop.edm.xml.cccev.RequirementMarshaller;
 import eu.toop.edm.xml.cv.BusinessMarshaller;
 import eu.toop.edm.xml.cv.PersonMarshaller;
 import eu.toop.edm.xml.dcatap.DistributionMarshaller;
-import eu.toop.regrep.RegRep4Reader;
-import eu.toop.regrep.RegRep4Writer;
-import eu.toop.regrep.RegRepHelper;
-import eu.toop.regrep.query.QueryRequest;
-import eu.toop.regrep.query.ResponseOptionType;
-import eu.toop.regrep.rim.AnyValueType;
-import eu.toop.regrep.rim.CollectionValueType;
-import eu.toop.regrep.rim.DateTimeValueType;
-import eu.toop.regrep.rim.InternationalStringType;
-import eu.toop.regrep.rim.InternationalStringValueType;
-import eu.toop.regrep.rim.LocalizedStringType;
-import eu.toop.regrep.rim.QueryType;
-import eu.toop.regrep.rim.SlotType;
-import eu.toop.regrep.rim.StringValueType;
-import eu.toop.regrep.rim.ValueType;
-import eu.toop.regrep.slot.ISlotProvider;
-import eu.toop.regrep.slot.SlotHelper;
-import eu.toop.regrep.slot.predefined.SlotId;
 
 /**
  * This class contains the data model for a single TOOP EDM Request. It requires
@@ -200,7 +202,8 @@ public class EDMRequest implements IEDMTopLevelObject
     ValueEnforcer.noNullValue (aFullfillingRequirements, "FullfillingRequirements");
     ValueEnforcer.notNull (aDataConsumer, "DataConsumer");
     if (!eQueryDefinition.isDataSujectOptional ())
-      ValueEnforcer.isFalse (aDataSubjectLegalPerson == null && aDataSubjectNaturalPerson == null, "A DataSubject must be set");
+      ValueEnforcer.isFalse (aDataSubjectLegalPerson == null && aDataSubjectNaturalPerson == null,
+                             "A DataSubject must be set");
     ValueEnforcer.isFalse (aDataSubjectLegalPerson != null && aDataSubjectNaturalPerson != null,
                            "Not more than one DataSubject must be set");
     ValueEnforcer.notNull (aRPP, "RequestPayloadProvider");
@@ -423,7 +426,8 @@ public class EDMRequest implements IEDMTopLevelObject
   @Nonnull
   public IVersatileWriter <QueryRequest> getWriter ()
   {
-    return new JAXBVersatileWriter <> (getAsQueryRequest (), RegRep4Writer.queryRequest (CCAGV.XSDS).setFormattedOutput (true));
+    return new JAXBVersatileWriter <> (getAsQueryRequest (),
+                                       RegRep4Writer.queryRequest (CCAGV.XSDS).setFormattedOutput (true));
   }
 
   @Nonnull
@@ -534,7 +538,8 @@ public class EDMRequest implements IEDMTopLevelObject
    * @param <IMPLTYPE>
    *        The implementation class of this class
    */
-  public abstract static class AbstractBuilder <IMPLTYPE extends AbstractBuilder <IMPLTYPE>> implements IGenericImplTrait <IMPLTYPE>
+  public abstract static class AbstractBuilder <IMPLTYPE extends AbstractBuilder <IMPLTYPE>> implements
+                                               IGenericImplTrait <IMPLTYPE>
   {
     protected final EToopQueryDefinitionType m_eQueryDefinition;
     protected String m_sRequestID;
@@ -593,6 +598,18 @@ public class EDMRequest implements IEDMTopLevelObject
     public final IMPLTYPE issueDateTimeNow ()
     {
       return issueDateTime (PDTFactory.getCurrentLocalDateTime ());
+    }
+
+    @Nonnull
+    public final IMPLTYPE issueDateTime (@Nullable final OffsetDateTime a)
+    {
+      return issueDateTime (a == null ? null : a.toLocalDateTime ());
+    }
+
+    @Nonnull
+    public final IMPLTYPE issueDateTime (@Nullable final XMLOffsetDateTime a)
+    {
+      return issueDateTime (a == null ? null : a.toLocalDateTime ());
     }
 
     @Nonnull
@@ -1012,7 +1029,8 @@ public class EDMRequest implements IEDMTopLevelObject
     }
 
     @Nonnull
-    public <T> BuilderConcept concepts (@Nullable final Iterable <? extends T> a, @Nonnull final Function <? super T, ConceptPojo> aMapper)
+    public <T> BuilderConcept concepts (@Nullable final Iterable <? extends T> a,
+                                        @Nonnull final Function <? super T, ConceptPojo> aMapper)
     {
       m_aConcepts.setAllMapped (a, aMapper);
       return thisAsT ();
@@ -1238,7 +1256,8 @@ public class EDMRequest implements IEDMTopLevelObject
     }
   }
 
-  private static void _applySlots (@Nonnull final SlotType aSlot, @Nonnull final EDMRequest.AbstractBuilder <?> aBuilder)
+  private static void _applySlots (@Nonnull final SlotType aSlot,
+                                   @Nonnull final EDMRequest.AbstractBuilder <?> aBuilder)
   {
     final String sName = aSlot.getName ();
     final ValueType aSlotValue = aSlot.getSlotValue ();
@@ -1254,7 +1273,7 @@ public class EDMRequest implements IEDMTopLevelObject
       case SlotIssueDateTime.NAME:
         if (aSlotValue instanceof DateTimeValueType)
         {
-          final LocalDateTime aCal = ((DateTimeValueType) aSlotValue).getValue ();
+          final XMLOffsetDateTime aCal = ((DateTimeValueType) aSlotValue).getValue ();
           aBuilder.issueDateTime (aCal);
         }
         break;

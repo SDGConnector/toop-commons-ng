@@ -67,15 +67,15 @@
   </developers>
   <dependencies>
     <dependency>
-      <groupId>com.helger</groupId>
+      <groupId>com.helger.commons</groupId>
       <artifactId>ph-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.helger</groupId>
+      <groupId>com.helger.commons</groupId>
       <artifactId>ph-datetime</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.helger</groupId>
+      <groupId>com.helger.commons</groupId>
       <artifactId>ph-xml</artifactId>
     </dependency>
     <dependency>
@@ -99,8 +99,8 @@
       <artifactId>ph-schematron-xslt</artifactId>
     </dependency>
     <dependency>
-      <groupId>eu.toop</groupId>
-      <artifactId>toop-regrep</artifactId>
+      <groupId>com.helger</groupId>
+      <artifactId>ph-regrep</artifactId>
     </dependency>
     <dependency>
       <groupId>com.sun.activation</groupId>
@@ -111,7 +111,8 @@
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- JUnit 4 for testing -->    <dependency>
+    <!-- JUnit 4 for testing -->
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
@@ -119,6 +120,11 @@
     <dependency>
       <groupId>com.helger</groupId>
       <artifactId>ph-genericode</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -203,21 +209,22 @@
               <artifactId>ph-xsds-xlink</artifactId>
             </episode>
             <episode>
-              <groupId>eu.toop</groupId>
-              <artifactId>toop-regrep</artifactId>
+              <groupId>com.helger</groupId>
+              <artifactId>ph-regrep</artifactId>
             </episode>
           </episodes>
         </configuration>
         <dependencies>
-          <!-- Required for VCard -->          <dependency>
-            <groupId>eu.toop</groupId>
-            <artifactId>toop-regrep</artifactId>
-            <version>${project.version}</version>
+          <!-- Required for VCard -->
+          <dependency>
+            <groupId>com.helger</groupId>
+            <artifactId>ph-regrep</artifactId>
+            <version>1.2.0</version>
           </dependency>
           <dependency>
             <groupId>com.helger</groupId>
             <artifactId>ph-jaxb22-plugin</artifactId>
-            <version>2.3.3.1</version>
+            <version>2.3.3.3</version>
           </dependency>
         </dependencies>
       </plugin>

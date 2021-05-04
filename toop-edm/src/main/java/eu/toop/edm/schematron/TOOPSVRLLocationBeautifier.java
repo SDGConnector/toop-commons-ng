@@ -37,10 +37,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.helger.commons.annotation.IsSPIImplementation;
+import com.helger.regrep.RegRep4NamespaceContext;
 import com.helger.schematron.svrl.ISVRLLocationBeautifierSPI;
 
 import eu.toop.edm.xml.cccev.CCCEVNamespaceContext;
-import eu.toop.regrep.RegRep4NamespaceContext;
 
 /**
  * Beautifier for Schematron error messages.
