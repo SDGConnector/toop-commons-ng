@@ -40,6 +40,7 @@ import javax.annotation.Nonnull;
 import com.helger.commons.collection.impl.CommonsArrayList;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.ubl23.CUBL23;
+import com.helger.xsds.ccts.cct.schemamodule.CCCTS;
 
 /**
  * Constants for the Core vocabulary
@@ -49,12 +50,13 @@ import com.helger.ubl23.CUBL23;
 public final class CCV
 {
   @Nonnull
-  private static final ClassLoader _getCL ()
+  private static ClassLoader _getCL ()
   {
     return CCV.class.getClassLoader ();
   }
 
-  public static final List <ClassPathResource> XSDS = new CommonsArrayList <> (CUBL23.XSD_UNQUALIFIED_DATA_TYPES,
+  public static final List <ClassPathResource> XSDS = new CommonsArrayList <> (CCCTS.getXSDResource (),
+                                                                               CUBL23.XSD_UNQUALIFIED_DATA_TYPES,
                                                                                new ClassPathResource ("schemas/CoreVocabularies-BasicComponents-1.1.xsd",
                                                                                                       _getCL ()),
                                                                                new ClassPathResource ("schemas/CoreVocabularies-AggregateComponents-1.1.xsd",
