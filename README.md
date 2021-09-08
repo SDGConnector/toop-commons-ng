@@ -10,6 +10,9 @@ The code contained in this project is used by:
 
 ## Status
 
+2021-09-08: release `v2.2.0`
+* Changed group ID to `com.helger.toop`
+
 2021-01-19: release `v2.1.1`
 * The project is now dual licensed under Apache License, Version 2.0 and EUPL 1.2
 * No code changes
