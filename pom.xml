@@ -47,7 +47,7 @@
   <packaging>pom</packaging>
   <name>toop-commons-ng-parent-pom</name>
   <description>Base POM to build the TOOP Commons NG projects</description>
-  <url>https://github.com/toop4eu/toop-commons-ng</url>
+  <url>https://github.com/phax/toop-commons-ng</url>
   <inceptionYear>2020</inceptionYear>
 
   <licenses>
@@ -59,9 +59,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git@github.com:toop4eu/toop-commons-ng.git</connection>
-    <developerConnection>scm:git:git@github.com:toop4eu/toop-commons-ng.git</developerConnection>
-    <url>http://github.com/toop4eu/toop-commons-ng</url>
+    <connection>scm:git:git@github.com:phax/toop-commons-ng.git</connection>
+    <developerConnection>scm:git:git@github.com:phax/toop-commons-ng.git</developerConnection>
+    <url>http://github.com/phax/toop-commons-ng</url>
     <tag>HEAD</tag>
   </scm>
 
